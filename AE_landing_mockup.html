@@ -719,6 +719,74 @@
     .footer-bottom a { color: var(--orange-text); text-decoration: none; }
     .footer-bottom a:hover { text-decoration: underline; }
 
+    /* ── SCROLL INDICATOR ────────────────────────────────────────── */
+    .scroll-indicator {
+      position: fixed;
+      right: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .scroll-indicator.visible { opacity: 1; }
+    .road-track {
+      position: relative;
+      width: 3px;
+      height: 56vh;
+      background: rgba(165,78,23,0.15);
+      border-radius: 2px;
+    }
+    /* Dashed road markings */
+    .road-track::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(238,232,220,0.12) 0px,
+        rgba(238,232,220,0.12) 6px,
+        transparent 6px,
+        transparent 14px
+      );
+    }
+    .road-fill {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      background: linear-gradient(to bottom, var(--orange-text), var(--orange));
+      border-radius: 2px;
+      transition: height 0.12s ease;
+    }
+    .road-car {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      transition: top 0.12s ease;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    }
+    .road-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(165,78,23,0.4);
+      writing-mode: vertical-rl;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 960px) { .scroll-indicator { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .road-car { transition: none; } .road-fill { transition: none; } }
+
     /* ── A11Y WIDGET ─────────────────────────────────────────────── */
     .a11y-btn-wrap {
       position: fixed;
