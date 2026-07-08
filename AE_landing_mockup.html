@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<!--
+  Adventure Enterprises — Landing Page Mockup
+  © 2026 Nat2Go Studio. All rights reserved.
+  Unauthorized reproduction or distribution of this design is prohibited.
+  nataliagolaszewski.com | nat2gostudio.com
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Adventure Enterprises — Vehicle Wraps Las Cruces, NM</title>
+
+  <!-- Helvetica Neue system stack — no Google Fonts needed -->
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:        #0a0a0a;
+      --brown:        #7B3D1B;
+      --green:        #3C5643;
+      --orange:       #A54E17;
+      --orange-text:  #C86A26;   /* lighter for small text on dark bg — better contrast */
+      --cream:        #EEE8DC;
+      --gray:         #141414;
+      --gray2:        #1e1e1e;
+      --gray3:        #2a2a2a;
+      --muted:        #9e9e9e;   /* #9e9e9e on #141414 ≈ 6:1 ✓  on #2a2a2a ≈ 4.8:1 ✓ */
+      --font-body:    'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Accessibility ──────────────────────────────────────────── */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      background: var(--orange);
+      color: #fff;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+      border-radius: 4px;
+      font-weight: 700;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+    :focus-visible { outline: 3px solid var(--orange-text); outline-offset: 3px; }
+
+    /* ── Animations ─────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollBanner {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .marquee-inner { animation: none !important; }
+    }
+
+    .anim-up { animation: fadeUp 0.65s var(--ease) both; }
+    .anim-in { animation: fadeIn 0.5s ease both; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.22s; }
+    .d3 { animation-delay: 0.38s; }
+    .d4 { animation-delay: 0.52s; }
+
+    /* ── Utilities ──────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Section labels — Helvetica, wide tracking */
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange-text);   /* #C86A26 on dark = ~5:1 ✓ */
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-body);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--cream);
+    }
+    .section-title span { color: var(--orange-text); }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.97rem;
+      max-width: 540px;
+      margin-top: 0.75rem;
+    }
+
+    .divider {
+      width: 40px; height: 3px;
+      background: var(--orange);
+      margin-bottom: 1.5rem;
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.22s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: #bf5c1c; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(165,78,23,0.35); }
+    .btn-outline { background: transparent; color: var(--cream); border: 2px solid rgba(238,232,220,0.3); }
+    .btn-outline:hover { border-color: var(--cream); background: rgba(238,232,220,0.07); }
+    .btn-white { background: #fff; color: var(--brown); font-weight: 800; }
+    .btn-white:hover { background: var(--cream); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.45); }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      background: rgba(10,10,10,0.93);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--cream);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+    }
+    /* Replace with <img src="logo.svg"> once logo is provided */
+    .nav-logo-mark {
+      width: 34px; height: 34px;
+      background: var(--orange);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(238,232,220,0.65);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+    .nav-phone {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-phone:hover { color: var(--cream); }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('img/about-accent.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.22) saturate(0.7);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,10,0.65) 0%, rgba(60,86,67,0.1) 60%, rgba(165,78,23,0.08) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 5.5rem 0 2rem;
+      max-width: 740px;
+    }
+    .hero-pill {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange-text);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .hero-title {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .hero-title strong { color: var(--orange-text); font-weight: 900; }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(238,232,220,0.68);
+      margin-bottom: 1.8rem;
+      max-width: 480px;
+      line-height: 1.65;
+    }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-bottom: 2rem; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .hero-tag {
+      font-family: var(--font-body);
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);                    /* dark text on light bg — high contrast */
+      background: rgba(238,232,220,0.88);     /* cream bg */
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(238,232,220,0.28);
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px; height: 36px;
+      background: linear-gradient(to bottom, rgba(238,232,220,0.28), transparent);
+    }
+
+    /* ── MARQUEE ────────────────────────────────────────────────── */
+    .marquee-section {
+      background: var(--orange);
+      padding: 0.85rem 0;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      position: relative;
+    }
+    .marquee-paused-label {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .marquee-section.is-paused .marquee-paused-label { opacity: 1; }
+    .marquee-inner {
+      display: flex;
+      gap: 0;
+      animation: scrollBanner 24s linear infinite;
+      width: max-content;
+    }
+    .marquee-section.is-paused .marquee-inner { animation-play-state: paused; }
+    .marquee-item {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.92);
+      padding: 0 2rem;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+    .marquee-dot { color: rgba(255,255,255,0.35); padding: 0 0.25rem; }
+
+    /* ── STATS ──────────────────────────────────────────────────── */
+    .stats-section { background: var(--gray); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item {
+      padding: 2rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--orange-text);     /* #C86A26 on #141414 = ~4.9:1 ✓ */
+      line-height: 1;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      color: var(--muted);           /* #888 on #141414 = 4.5:1 ✓ */
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── SERVICES ───────────────────────────────────────────────── */
+    .services-section { padding: 6rem 0; background: var(--gray); }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(255,255,255,0.04);
+    }
+    .service-card {
+      background: var(--gray2);
+      padding: 2.25rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover { background: #222; }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-card:hover .svc-icon { background: var(--orange); color: #fff; }
+
+    .svc-icon {
+      width: 48px; height: 48px;
+      background: rgba(165,78,23,0.12);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange-text);
+      margin-bottom: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .svc-icon svg { width: 22px; height: 22px; }
+    .svc-num {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      color: rgba(200,106,38,0.55);   /* orange-text at 55% — decorative, aria-hidden */
+      letter-spacing: 0.1em;
+      margin-bottom: 0.35rem;
+    }
+    .svc-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--cream);
+      margin-bottom: 0.65rem;
+      letter-spacing: -0.01em;
+    }
+    .svc-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange-text);
+      text-decoration: none;
+    }
+    .service-wide {
+      grid-column: span 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 1.75rem 2.5rem;
+      background: rgba(165,78,23,0.07);
+      border: 1px solid rgba(165,78,23,0.18);
+    }
+    .service-wide-text strong { font-size: 1rem; font-weight: 800; color: var(--cream); display: block; margin-bottom: 0.2rem; }
+    .service-wide-text span { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── ABOUT ──────────────────────────────────────────────────── */
+    .about-section { padding: 6rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-imgs { position: relative; }
+    .about-img-main { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 6px; display: block; }
+    .about-img-accent {
+      position: absolute;
+      bottom: -2rem; right: -2rem;
+      width: 46%; aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 4px solid var(--black);
+    }
+    .about-badge {
+      position: absolute;
+      top: -1.5rem; left: -1.5rem;
+      background: var(--orange);
+      border-radius: 6px;
+      padding: 1.1rem 1.25rem;
+      text-align: center;
+    }
+    .about-badge-num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; letter-spacing: -0.03em; }
+    .about-badge-txt { font-family: var(--font-body); font-size: 0.68rem; color: rgba(255,255,255,0.9); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; margin-top: 0.2rem; }
+    .about-text { color: rgba(238,232,220,0.7); margin-bottom: 1.1rem; font-size: 0.97rem; line-height: 1.75; }
+    .about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 0.65rem; margin: 1.5rem 0; }
+    .pillar { display: flex; align-items: center; gap: 0.65rem; }
+    .pillar-check { color: var(--orange-text); flex-shrink: 0; }
+    .pillar-check svg { width: 16px; height: 16px; }
+    .pillar-txt { font-size: 0.875rem; font-weight: 600; color: var(--cream); }
+
+    /* ── GALLERY ────────────────────────────────────────────────── */
+    .gallery-section { padding: 6rem 0; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 210px 210px;
+      gap: 6px;
+      margin-top: 2.5rem;
+    }
+    .g-item { overflow: hidden; border-radius: 4px; position: relative; }
+    .g-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+    .g-item:nth-child(2) { grid-column: span 4; }
+    .g-item:nth-child(3) { grid-column: span 3; }
+    .g-item:nth-child(4) { grid-column: span 3; }
+    .g-item:nth-child(5) { grid-column: span 4; }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s ease; }
+    .g-item:hover img { transform: scale(1.05); }
+    .g-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.55) 0%, transparent 55%); opacity: 0; transition: opacity 0.3s; }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-more {
+      background: linear-gradient(135deg, var(--brown) 0%, var(--orange) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .g-more-icon { font-size: 2rem; color: rgba(255,255,255,0.18); font-weight: 900; }
+    .g-more-txt {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    /* ── WHY US ─────────────────────────────────────────────────── */
+    .why-section { padding: 6rem 0; background: var(--gray); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .why-img-wrap { position: relative; }
+    .why-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 6px; display: block; }
+    .why-stripe {
+      position: absolute;
+      top: 2rem; right: -2rem;
+      width: 4px; height: 55%;
+      background: var(--orange);
+      border-radius: 4px;
+    }
+    .why-reasons { margin-top: 2rem; }
+    .why-reason { display: flex; gap: 1.25rem; padding: 1.35rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .why-reason:last-child { border-bottom: none; }
+    .why-n {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      color: rgba(200,106,38,0.4);   /* decorative, aria-hidden */
+      line-height: 1.8;
+      min-width: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .why-title { font-weight: 800; color: var(--cream); margin-bottom: 0.25rem; font-size: 0.97rem; }
+    .why-txt { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── TESTIMONIALS ────────────────────────────────────────────── */
+    .testimonials-section { padding: 6rem 0; }
+    .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+    .t-card {
+      background: var(--gray);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 1.75rem;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .t-card:hover { border-color: rgba(165,78,23,0.28); transform: translateY(-3px); }
+    .t-stars { display: flex; gap: 2px; margin-bottom: 0.9rem; }
+    .t-star { color: #f5c018; font-size: 0.85rem; }
+    .t-text { font-size: 0.9rem; color: rgba(238,232,220,0.72); line-height: 1.7; margin-bottom: 1.4rem; }
+    .t-author { display: flex; align-items: center; gap: 0.7rem; }
+    .t-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--brown);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: #fff; flex-shrink: 0;
+    }
+    .t-name { font-weight: 700; font-size: 0.875rem; color: var(--cream); }
+    .t-meta { font-family: var(--font-body); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
+    .g-badge {
+      position: absolute;
+      top: 1.1rem; right: 1.1rem;
+      display: flex; align-items: center; gap: 0.3rem;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      color: var(--muted);
+    }
+    .g-circle {
+      width: 16px; height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 900;
+      color: #4285f4;
+    }
+    .t-overall {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding: 1.5rem 2rem;
+      background: var(--gray);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+    }
+    .t-overall-num {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--orange-text);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .t-overall-stars { display: flex; gap: 3px; margin-bottom: 0.3rem; }
+    .t-overall-sub { font-family: var(--font-body); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ── CTA BANNER ─────────────────────────────────────────────── */
+    .cta-section {
+      padding: 5.5rem 0;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--orange) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Logo watermark en CTA — se reemplaza por <img> cuando haya archivo */
+    .cta-logo-bg {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 32%;
+      max-width: 280px;
+      opacity: 0.06;
+      pointer-events: none;
+      user-select: none;
+    }
+    .cta-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 900; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.9rem; position: relative; }
+    .cta-sub { color: rgba(255,255,255,0.78); margin-bottom: 2rem; font-size: 1rem; position: relative; }
+    .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; position: relative; }
+
+    /* ── CONTACT ─────────────────────────────────────────────────── */
+    .contact-section { padding: 6rem 0; background: var(--gray); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: 4rem; align-items: start; }
+    .contact-info h3 { font-size: 1.6rem; font-weight: 800; color: var(--cream); margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+    .contact-info p { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    .c-detail { display: flex; align-items: flex-start; gap: 0.9rem; margin-bottom: 1.4rem; }
+    .c-icon {
+      width: 40px; height: 40px;
+      background: rgba(165,78,23,0.1);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange-text);
+      flex-shrink: 0;
+    }
+    .c-icon svg { width: 18px; height: 18px; }
+    .c-lbl { font-family: var(--font-body); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; }
+    .c-val { font-size: 0.92rem; color: var(--cream); font-weight: 500; margin-top: 0.1rem; }
+    .c-val a { color: inherit; text-decoration: none; }
+    .c-val a:hover { color: var(--orange-text); }
+
+    .c-form { background: var(--gray2); border-radius: 8px; padding: 2.25rem; border: 1px solid rgba(255,255,255,0.05); }
+    .c-form h3 { font-size: 1.3rem; font-weight: 800; color: var(--cream); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-lbl { display: block; font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.35rem; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 4px;
+      padding: 0.72rem 0.9rem;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--orange-text);
+    }
+    .form-textarea { resize: vertical; min-height: 90px; }
+    .form-select option { background: #1e1e1e; }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    .footer { background: #060606; padding: 3.5rem 0 1.5rem; border-top: 1px solid rgba(255,255,255,0.04); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-brand p { color: var(--muted); font-size: 0.875rem; line-height: 1.72; margin-top: 1rem; max-width: 270px; }
+    .footer-tagline {
+      margin-top: 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(200,106,38,0.45);
+      font-weight: 700;
+    }
+    .footer-h { font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--cream); margin-bottom: 1.1rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 0.6rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange-text); }
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 0.4rem; }
+    .social-btn {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .social-btn svg { width: 16px; height: 16px; }
+    .social-btn:hover { background: var(--orange); color: #fff; }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.50); }
+    .footer-bottom a { color: var(--orange-text); text-decoration: none; }
+    .footer-bottom a:hover { text-decoration: underline; }
+
+    /* ── SCROLL INDICATOR ────────────────────────────────────────── */
+    .scroll-indicator {
+      position: fixed;
+      right: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .scroll-indicator.visible { opacity: 1; }
+    .road-track {
+      position: relative;
+      width: 3px;
+      height: 56vh;
+      background: rgba(165,78,23,0.15);
+      border-radius: 2px;
+    }
+    /* Dashed road markings */
+    .road-track::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(238,232,220,0.12) 0px,
+        rgba(238,232,220,0.12) 6px,
+        transparent 6px,
+        transparent 14px
+      );
+    }
+    .road-fill {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      background: linear-gradient(to bottom, var(--orange-text), var(--orange));
+      border-radius: 2px;
+      transition: height 0.12s ease;
+    }
+    .road-car {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 22px;
+      transition: top 0.12s ease;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    }
+    .road-label {
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(165,78,23,0.4);
+      writing-mode: vertical-rl;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 960px) { .scroll-indicator { display: none; } }
+    @media (prefers-reduced-motion: reduce) { .road-car { transition: none; } .road-fill { transition: none; } }
+
+    /* ── A11Y WIDGET ─────────────────────────────────────────────── */
+    .a11y-btn-wrap {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 999;
+    }
+    .a11y-btn {
+      width: 46px; height: 46px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,0.12);
+      transition: all 0.2s;
+    }
+    .a11y-btn svg { width: 20px; height: 20px; }
+    .a11y-btn:hover { background: #4c6e57; transform: scale(1.08); }
+    .a11y-tip {
+      position: absolute;
+      bottom: calc(100% + 0.5rem);
+      right: 0;
+      background: rgba(18,18,18,0.97);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 5px;
+      padding: 0.45rem 0.7rem;
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      white-space: nowrap;
+      color: var(--cream);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.2s;
+    }
+    .a11y-btn-wrap:hover .a11y-tip { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .about-grid, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .service-wide { grid-column: span 2; }
+      .t-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto; }
+      .g-item { grid-column: span 1 !important; grid-row: span 1 !important; height: 190px; }
+      .nav-links { display: none; }
+      .about-img-accent, .why-stripe { display: none; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .service-wide { grid-column: span 1; flex-direction: column; align-items: flex-start; }
+      .t-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .g-item { height: 150px; }
+    }
+
+    /* ── QUOTE QUIZ ─────────────────────────────────────────────── */
+    .quiz-section {
+      background: var(--gray);
+      padding: 6rem 0;
+    }
+    .quiz-intro {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 3rem;
+      max-width: 500px;
+    }
+    .quiz-wrap {
+      max-width: 680px;
+      background: var(--gray2);
+      border: 1px solid var(--gray3);
+      border-radius: 16px;
+      padding: 2.5rem;
+    }
+    .quiz-progress {
+      height: 4px;
+      background: var(--gray3);
+      border-radius: 4px;
+      margin-bottom: 0.6rem;
+      overflow: hidden;
+    }
+    .quiz-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--orange), var(--orange-text));
+      border-radius: 4px;
+      transition: width 0.4s var(--ease);
+    }
+    .quiz-step-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; animation: fadeUp 0.35s var(--ease) both; }
+    .quiz-q {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .quiz-opt {
+      background: var(--gray3);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      padding: 1.1rem 1rem;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: border-color 0.18s, background 0.18s, transform 0.12s;
+    }
+    .quiz-opt:hover {
+      border-color: var(--orange-text);
+      background: rgba(165,78,23,0.12);
+      transform: translateY(-2px);
+    }
+    .quiz-opt svg { flex-shrink: 0; color: var(--orange-text); }
+    .quiz-result-summary {
+      background: rgba(165,78,23,0.1);
+      border: 1px solid rgba(165,78,23,0.25);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      color: rgba(238,232,220,0.8);
+      line-height: 1.7;
+    }
+    .quiz-result-summary strong { color: var(--orange-text); }
+    .quiz-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .quiz-input {
+      background: var(--gray3);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.18s;
+    }
+    .quiz-input:focus { outline: none; border-color: var(--orange-text); }
+    .quiz-input::placeholder { color: var(--muted); }
+    .quiz-submit {
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.1s;
+    }
+    .quiz-submit:hover { background: var(--brown); transform: translateY(-1px); }
+    .quiz-fine {
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .quiz-success {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .quiz-success-icon {
+      width: 64px; height: 64px;
+      background: rgba(60,86,67,0.2);
+      border: 2px solid var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: #7dba96;
+    }
+    .quiz-success h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+    .quiz-success p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.65;
+    }
+    @media (max-width: 560px) {
+      .quiz-options { grid-template-columns: 1fr; }
+      .quiz-wrap { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ── NAV ──────────────────────────────────────────────────────── -->
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="Adventure Enterprises — Home">
+        <img src="img/logo-white.png" alt="Adventure Enterprises" height="44" style="max-width:220px; object-fit:contain;" />
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Our Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="tel:5755239336" class="nav-phone" aria-label="Call us at 575-523-9336">575-523-9336</a>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────────────────── -->
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <!-- IMAGEN HERO: Cambiar URL por la foto más impactante del cliente -->
+  <div class="hero-bg" role="img" aria-label="Vehicle wrap by Adventure Enterprises"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-pill anim-in">Las Cruces, New Mexico</div>
+      <h1 class="hero-title anim-up d1" id="hero-title">
+        We Don't<br />
+        Just Wrap:<br />
+        <strong>We Transform.</strong>
+      </h1>
+      <p class="hero-sub anim-up d2">
+        Premium vehicle wraps, window tinting, windshield replacements, custom decals, and signs.
+        Bold work. Fast turnaround. Built to last.
+      </p>
+      <div class="hero-btns anim-up d3">
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+        <a href="tel:5755239336" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.98 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call Us Now
+        </a>
+      </div>
+      <div class="hero-tags anim-up d4" aria-label="Services offered">
+        <span class="hero-tag">Vehicle Wraps</span>
+        <span class="hero-tag">Window Tinting</span>
+        <span class="hero-tag">Windshield Repair</span>
+        <span class="hero-tag">Decals</span>
+        <span class="hero-tag">Signs</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── MARQUEE (click to pause) ────────────────────────────────── -->
+<div
+  class="marquee-section"
+  role="marquee"
+  aria-label="Services offered by Adventure Enterprises. Click to pause."
+  tabindex="0"
+  onclick="this.classList.toggle('is-paused')"
+  onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('is-paused'); event.preventDefault();}"
+>
+  <div class="marquee-inner" aria-hidden="true">
+    <span class="marquee-item">Vehicle Wraps</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Window Tinting</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Windshield Replacement</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Decals</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Business Signs</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Las Cruces, NM</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Vehicle Wraps</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Window Tinting</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Windshield Replacement</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Decals</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Business Signs</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Las Cruces, NM</span><span class="marquee-dot">✦</span>
+  </div>
+  <span class="marquee-paused-label">Paused — Click to Resume</span>
+</div>
+
+<!-- ── STATS ─────────────────────────────────────────────────────── -->
+<section class="stats-section" aria-label="Key figures">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years in Las Cruces</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4.3★</div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1 Day</div>
+        <div class="stat-label">Fast Turnaround</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+
+<!-- ── SERVICES ─────────────────────────────────────────────────── -->
+<section class="services-section" id="services" aria-labelledby="services-h">
+  <div class="container">
+    <div class="services-header">
+      <div>
+        <div class="label">What We Do</div>
+        <h2 class="section-title" id="services-h">One Stop.<br /><span>Every Need.</span></h2>
+      </div>
+      <p class="section-sub">From full vehicle transformations to custom signage, we handle it all right here in Las Cruces.</p>
+    </div>
+    <div class="services-grid" role="list">
+
+      <article class="service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5a2 2 0 01-2-2V9a2 2 0 012-2h10l4 4v4a2 2 0 01-2 2z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+        </div>
+        <div class="svc-num" aria-hidden="true">01</div>
+        <h3 class="svc-name">Vehicle Wraps</h3>
+        <p class="svc-desc">Full and partial vehicle wraps using premium vinyl. Turn your vehicle into a moving billboard — or just make it look incredible. Commercial fleets welcome.</p>
+        <a href="#contact" class="svc-link">Get a Quote →</a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+        </div>
+        <div class="svc-num" aria-hidden="true">02</div>
+        <h3 class="svc-name">Window Tinting</h3>
+        <p class="svc-desc">Reduce glare, block UV rays, and enhance privacy. Professional tinting available for cars, trucks, SUVs, and commercial vehicles.</p>
+        <a href="#contact" class="svc-link">Get a Quote →</a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>
+        </div>
+        <div class="svc-num" aria-hidden="true">03</div>
+        <h3 class="svc-name">Windshield Replacement</h3>
+        <p class="svc-desc">Fast, professional replacement with quality materials. We work with most insurance providers and get you back on the road the same day.</p>
+        <a href="#contact" class="svc-link">Get a Quote →</a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="svc-num" aria-hidden="true">04</div>
+        <h3 class="svc-name">Custom Decals</h3>
+        <p class="svc-desc">Precision-cut custom decals for vehicles, storefronts, and equipment. Perfect for branding, personalization, or sport team graphics.</p>
+        <a href="#contact" class="svc-link">Get a Quote →</a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 6V4m8 2V4M12 6V4"/></svg>
+        </div>
+        <div class="svc-num" aria-hidden="true">05</div>
+        <h3 class="svc-name">Signs</h3>
+        <p class="svc-desc">High-quality indoor and outdoor signage for businesses. From banners to yard signs to storefront displays: bold, durable, and professionally finished.</p>
+        <a href="#contact" class="svc-link">Get a Quote →</a>
+      </article>
+
+      <div class="service-wide service-card" role="listitem">
+        <div class="svc-icon" aria-hidden="true" style="margin-bottom:0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8l-2 4h12l-2-4z"/></svg>
+        </div>
+        <div class="service-wide-text">
+          <strong>Fleet &amp; Commercial Services</strong>
+          <span>Special rates and priority scheduling for businesses with multiple vehicles. Ask about fleet packages.</span>
+        </div>
+        <a href="#contact" class="btn btn-primary" style="flex-shrink:0;">Contact for Fleet Quote</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ─────────────────────────────────────────────────────── -->
+<section class="about-section" id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-imgs">
+        <div class="about-badge" aria-label="10 plus years in business">
+          <div class="about-badge-num">10+</div>
+          <div class="about-badge-txt">Years in<br />Las Cruces</div>
+        </div>
+        <!-- IMAGEN: Cambiar por about-main.jpg del cliente -->
+        <img
+          class="about-img-main"
+          src="img/about-main.jpg"
+          alt="Adventure Enterprises owner with custom print"
+          loading="lazy"
+          width="600" height="450"
+          style="object-position: center 15%;"
+        />
+        <img
+          class="about-img-accent"
+          src="img/gallery-4.jpg"
+          alt="Vehicle transformation by Adventure Enterprises"
+          loading="lazy"
+          width="300" height="300"
+        />
+      </div>
+      <div>
+        <div class="label">About Us</div>
+        <div class="divider"></div>
+        <h2 class="section-title" id="about-h">Your Vehicle.<br /><span>Our Craft.</span></h2>
+        <p class="about-text" style="margin-top:1rem;">
+          Adventure Enterprises is Las Cruces' one-stop shop for vehicle and signage solutions. Inspired by the owner's outdoor spirit: focus, precision, and respect for the craft. That same mindset drives every project we take on.
+        </p>
+        <p class="about-text">
+          Whether you're a small business owner branding a fleet, or an enthusiast wanting a head-turning wrap, we deliver bold results with fast turnaround and reliable service.
+        </p>
+        <div class="about-pillars" role="list">
+          <div class="pillar" role="listitem">
+            <span class="pillar-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="pillar-txt">Bold, head-turning work</span>
+          </div>
+          <div class="pillar" role="listitem">
+            <span class="pillar-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="pillar-txt">Reliable, on-time delivery</span>
+          </div>
+          <div class="pillar" role="listitem">
+            <span class="pillar-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="pillar-txt">Creative custom designs</span>
+          </div>
+          <div class="pillar" role="listitem">
+            <span class="pillar-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span class="pillar-txt">Professional and friendly team</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ────────────────────────────────────────────────────── -->
+<section class="gallery-section" id="gallery" aria-labelledby="gallery-h">
+  <div class="container">
+    <div class="label">Our Work</div>
+    <h2 class="section-title" id="gallery-h">See the <span>Transformation</span></h2>
+    <p class="section-sub">From commercial fleets to custom personal vehicles: every project is built to impress.</p>
+    <!-- IMÁGENES: Reemplazar con gallery-1.jpg ... gallery-5.jpg del cliente -->
+    <div class="gallery-grid" role="list" aria-label="Portfolio gallery">
+      <div class="g-item" role="listitem">
+        <img src="img/gallery-1.jpg" alt="Custom food truck wrap by Adventure Enterprises" loading="lazy" />
+        <div class="g-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="g-item" role="listitem">
+        <img src="img/gallery-2.jpg" alt="Commercial truck wrap" loading="lazy" />
+        <div class="g-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="g-item" role="listitem">
+        <img src="img/gallery-3.jpg" alt="Full vehicle wrap branding" loading="lazy" />
+        <div class="g-overlay" aria-hidden="true"></div>
+      </div>
+      <div class="g-item" role="listitem">
+        <img src="img/gallery-4.jpg" alt="Windshield replacement before and after" loading="lazy" />
+        <div class="g-overlay" aria-hidden="true"></div>
+      </div>
+      <a href="https://www.instagram.com/adventureenterpriseslascruces/" target="_blank" rel="noopener noreferrer" class="g-item g-more" role="listitem" aria-label="See more on Instagram" style="text-decoration:none;">
+        <div class="g-more-icon" aria-hidden="true">+</div>
+        <div class="g-more-txt">More work on Instagram</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY AE ──────────────────────────────────────────────────────── -->
+<section class="why-section" aria-labelledby="why-h">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-img-wrap">
+        <img
+          class="why-img"
+          src="img/gallery-2.jpg"
+          alt="Commercial vehicle wrap by Adventure Enterprises"
+          loading="lazy"
+          width="480" height="600"
+        />
+        <div class="why-stripe" aria-hidden="true"></div>
+      </div>
+      <div>
+        <div class="label">Why Choose Us</div>
+        <div class="divider"></div>
+        <h2 class="section-title" id="why-h">Adventure Made<br /><span>Different.</span></h2>
+        <div class="why-reasons" role="list">
+          <div class="why-reason" role="listitem">
+            <div class="why-n" aria-hidden="true">01</div>
+            <div>
+              <div class="why-title">Local Experts, Personal Service</div>
+              <p class="why-txt">We're a Las Cruces business. We know the community, and we treat every project like it's our own vehicle.</p>
+            </div>
+          </div>
+          <div class="why-reason" role="listitem">
+            <div class="why-n" aria-hidden="true">02</div>
+            <div>
+              <div class="why-title">Premium Materials Only</div>
+              <p class="why-txt">High-grade vinyl and materials built to withstand New Mexico's heat and sun. No shortcuts.</p>
+            </div>
+          </div>
+          <div class="why-reason" role="listitem">
+            <div class="why-n" aria-hidden="true">03</div>
+            <div>
+              <div class="why-title">Fast Turnaround</div>
+              <p class="why-txt">Most jobs completed same day or next day. We respect your time without cutting corners on quality.</p>
+            </div>
+          </div>
+          <div class="why-reason" role="listitem">
+            <div class="why-n" aria-hidden="true">04</div>
+            <div>
+              <div class="why-title">Full Service, One Location</div>
+              <p class="why-txt">Wraps, tinting, windshield, decals, and signs — everything under one roof on N. Solano Dr.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────────────────── -->
+<section class="testimonials-section" aria-labelledby="reviews-h">
+  <div class="container">
+    <div class="label">Google Reviews</div>
+    <h2 class="section-title" id="reviews-h">What Clients <span>Are Saying</span></h2>
+    <div class="t-grid" role="list">
+
+      <article class="t-card" role="listitem">
+        <span class="g-badge"><span class="g-circle">G</span> Google</span>
+        <div class="t-stars" aria-label="5 out of 5 stars">
+          <span class="t-star" aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="t-text">"Had my truck wrapped and it came out absolutely perfect. The team was professional, fast, and the quality is incredible. Could not be happier with the results."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">MR</div>
+          <div>
+            <div class="t-name">Marcus R.</div>
+            <div class="t-meta">Vehicle Wrap Customer</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="t-card" role="listitem">
+        <span class="g-badge"><span class="g-circle">G</span> Google</span>
+        <div class="t-stars" aria-label="5 out of 5 stars">
+          <span class="t-star" aria-hidden="true">★★★★★</span>
+        </div>
+        <p class="t-text">"Got my whole work van fleet wrapped for branding. Best price in town and the wraps look sharp. Highly recommend for any business owner."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">JL</div>
+          <div>
+            <div class="t-name">Jennifer L.</div>
+            <div class="t-meta">Fleet Wrap Customer</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="t-card" role="listitem">
+        <span class="g-badge"><span class="g-circle">G</span> Google</span>
+        <div class="t-stars" aria-label="4 out of 5 stars">
+          <span class="t-star" aria-hidden="true">★★★★</span><span style="color:#444;">★</span>
+        </div>
+        <p class="t-text">"Needed a windshield replaced ASAP and they got me in the same day. Fast, affordable, and they worked with my insurance. Will be back for window tinting."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">DT</div>
+          <div>
+            <div class="t-name">David T.</div>
+            <div class="t-meta">Windshield Customer</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="t-overall" aria-label="Overall rating: 4.3 out of 5 stars based on Google reviews">
+      <div class="t-overall-num">4.3</div>
+      <div>
+        <div class="t-overall-stars" aria-hidden="true">
+          <span class="t-star">★★★★</span><span style="color:#555;">★</span>
+        </div>
+        <div class="t-overall-sub">Based on Google Reviews · Las Cruces, NM</div>
+      </div>
+      <a href="https://www.google.com/maps/place/Adventure+Enterprises" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-left:auto;">See All Reviews</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── QUOTE QUIZ ──────────────────────────────────────────────────── -->
+<section class="quiz-section" id="quiz" aria-labelledby="quiz-h">
+  <div class="container">
+    <div class="label">Quick Quote</div>
+    <h2 class="section-title" id="quiz-h">What Are You <span>Transforming?</span></h2>
+    <p class="quiz-intro">Answer 3 quick questions and we'll get you a tailored estimate — no commitment needed.</p>
+
+    <div class="quiz-wrap">
+      <div class="quiz-progress" aria-label="Quiz progress" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
+        <div class="quiz-bar" id="quizBar" style="width:33%"></div>
+      </div>
+      <div class="quiz-step-label" id="quizStepLabel">Step 1 of 3</div>
+
+      <!-- Step 1: Service -->
+      <div class="quiz-step active" id="qStep1">
+        <h3 class="quiz-q">What service are you looking for?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button" data-key="service" data-val="Vehicle Wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="22" height="10" rx="3"/><path d="M5 7V5a2 2 0 012-2h10a2 2 0 012 2v2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            Vehicle Wrap
+          </button>
+          <button class="quiz-opt" type="button" data-key="service" data-val="Window Tinting">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Window Tinting
+          </button>
+          <button class="quiz-opt" type="button" data-key="service" data-val="Windshield Replacement">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8l4-4h8l4 4v8l-4 4H8l-4-4V8z"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Windshield Replacement
+          </button>
+          <button class="quiz-opt" type="button" data-key="service" data-val="Custom Decals & Signs">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Custom Decals & Signs
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Vehicle type -->
+      <div class="quiz-step" id="qStep2">
+        <h3 class="quiz-q">What type of vehicle?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button" data-key="vehicle" data-val="Sedan / Coupe">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V9a2 2 0 012-2h1l3-3h8l3 3h1a2 2 0 012 2v6a2 2 0 01-2 2h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            Sedan / Coupe
+          </button>
+          <button class="quiz-opt" type="button" data-key="vehicle" data-val="SUV / Truck">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="8" width="22" height="9" rx="2"/><path d="M5 8V6a2 2 0 012-2h10a2 2 0 012 2v2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+            SUV / Truck
+          </button>
+          <button class="quiz-opt" type="button" data-key="vehicle" data-val="Van / Box Truck">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="22" height="12" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Van / Box Truck
+          </button>
+          <button class="quiz-opt" type="button" data-key="vehicle" data-val="Fleet (multiple vehicles)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="13" height="9" rx="1.5"/><rect x="10" y="9" width="13" height="7" rx="1.5"/><circle cx="5" cy="16" r="1.5"/><circle cx="16" cy="16" r="1.5"/></svg>
+            Fleet (multiple)
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Goal -->
+      <div class="quiz-step" id="qStep3">
+        <h3 class="quiz-q">What's the main goal?</h3>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button" data-key="goal" data-val="Brand my business">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Brand my business
+          </button>
+          <button class="quiz-opt" type="button" data-key="goal" data-val="Personal style upgrade">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Personal style upgrade
+          </button>
+          <button class="quiz-opt" type="button" data-key="goal" data-val="Protect the vehicle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Protect the vehicle
+          </button>
+          <button class="quiz-opt" type="button" data-key="goal" data-val="All of the above">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            All of the above
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 4: Contact -->
+      <div class="quiz-step" id="qStep4">
+        <div class="quiz-result-summary" id="quizSummary"></div>
+        <h3 class="quiz-q">Almost there! How do we reach you?</h3>
+        <div class="quiz-form">
+          <input class="quiz-input" type="text" id="quizName" placeholder="Your name" autocomplete="name" />
+          <input class="quiz-input" type="tel" id="quizPhone" placeholder="Your phone number" autocomplete="tel" />
+          <button class="quiz-submit" type="button" id="quizSubmitBtn">Send My Quote Request &rarr;</button>
+        </div>
+        <p class="quiz-fine">We'll reach out within 1 business day. No spam, ever.</p>
+      </div>
+
+      <!-- Step 5: Success -->
+      <div class="quiz-step" id="qStep5">
+        <div class="quiz-success">
+          <div class="quiz-success-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>We've got your request!</h3>
+          <p>Expect a call or text from us soon. In the meantime, check out our latest work on Instagram.</p>
+          <a href="https://www.instagram.com/adventureenterpriseslascruces/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">See Our Work</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ─────────────────────────────────────────────────── -->
+<section class="cta-section" aria-label="Call to action">
+  <img class="cta-logo-bg" src="img/logo-white-2.png" alt="" aria-hidden="true" />
+  <div class="container" style="position:relative; z-index:1;">
+    <h2 class="cta-title">Ready to Transform Your Vehicle?</h2>
+    <p class="cta-sub">Free quotes, no obligation. Open Mon to Fri, 8am to 5pm.</p>
+    <div class="cta-btns">
+      <a href="#contact" class="btn btn-white">Get a Free Quote</a>
+      <a href="tel:5755239336" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.98 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        575-523-9336
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────────────────────── -->
+<section class="contact-section" id="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="label">Contact Us</div>
+    <h2 class="section-title" id="contact-h" style="margin-bottom:2.5rem;">Let's Get <span>Started</span></h2>
+    <div class="contact-grid">
+      <div>
+        <h3 class="contact-info" style="display:block;">Adventure Enterprises</h3>
+        <p style="color:var(--muted); font-size:0.9rem; margin:0.4rem 0 2rem;">Reach out for a free quote or to schedule a visit. We're here Monday through Friday.</p>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012.98 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">Phone</div>
+            <div class="c-val"><a href="tel:5755239336">575-523-9336</a></div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">Email</div>
+            <div class="c-val">adventureenterprisesllc@gmail.com</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">Address</div>
+            <div class="c-val">1225 N. Solano Dr, Las Cruces, NM 88001</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="c-lbl">Hours</div>
+            <div class="c-val">Mon to Fri: 8am to 5pm</div>
+          </div>
+        </div>
+      </div>
+      <div class="c-form">
+        <h3>Request a Free Quote</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-lbl" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="John Smith" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-lbl" for="phone">Phone Number</label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="(575) 000-0000" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl" for="service">Service Needed</label>
+          <select class="form-select" id="service" name="service">
+            <option value="">Select a service...</option>
+            <option>Vehicle Wrap</option>
+            <option>Window Tinting</option>
+            <option>Windshield Replacement</option>
+            <option>Custom Decals</option>
+            <option>Signs</option>
+            <option>Fleet / Commercial</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-lbl" for="vehicle">Vehicle and Details</label>
+          <textarea class="form-textarea" id="vehicle" name="vehicle" placeholder="Tell us about your vehicle and what you're looking for..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+          Send My Quote Request
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer class="footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:1rem; font-weight:800; display:flex; align-items:center; gap:0.6rem; color:var(--cream); letter-spacing:0.01em;">
+          <img src="img/logo-white.png" alt="Adventure Enterprises" height="30" style="max-width:160px; object-fit:contain;" />
+        </div>
+        <p>Your one-stop shop for vehicle wraps, window tinting, windshield replacements, decals, and signs in Las Cruces, NM.</p>
+        <div class="footer-tagline">From Wraps to Windows: Your Style, Our Craft.</div>
+      </div>
+      <div>
+        <div class="footer-h">Services</div>
+        <ul class="footer-links" role="list">
+          <li><a href="#services">Vehicle Wraps</a></li>
+          <li><a href="#services">Window Tinting</a></li>
+          <li><a href="#services">Windshield Replacement</a></li>
+          <li><a href="#services">Custom Decals</a></li>
+          <li><a href="#services">Signs</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-h">Company</div>
+        <ul class="footer-links" role="list">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#gallery">Our Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Get a Quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-h">Find Us</div>
+        <p style="font-size:0.875rem; color:var(--muted); line-height:1.75; margin-bottom:1rem;">
+          1225 N. Solano Dr<br />
+          Las Cruces, NM 88001<br />
+          Mon to Fri: 8am to 5pm<br />
+          <a href="tel:5755239336" style="color:var(--orange-text); text-decoration:none;">575-523-9336</a>
+        </p>
+        <div class="footer-social" aria-label="Social media links">
+          <a href="https://www.facebook.com/adventureenterprises" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/adventureenterpriseslascruces/" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.google.com/maps/place/Adventure+Enterprises" class="social-btn" aria-label="Google Maps" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Adventure Enterprises LLC. All rights reserved.</p>
+      <p>Website design by <a href="https://nat2gostudio.com" target="_blank" rel="noopener noreferrer">Nat2Go Studio</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SCROLL ROAD INDICATOR ─────────────────────────────────────── -->
+<div class="scroll-indicator" id="scrollIndicator" aria-hidden="true">
+  <div class="road-track" id="roadTrack">
+    <div class="road-fill" id="roadFill"></div>
+    <!-- Van SVG — top-down bird's-eye view, front (headlights) at bottom, traveling downward -->
+    <div class="road-car" id="roadCar">
+      <svg viewBox="0 0 24 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Van body (rear at top, front at bottom) -->
+        <rect x="3" y="3" width="18" height="38" rx="4" fill="#A54E17"/>
+        <!-- Roof panel highlight -->
+        <rect x="5" y="5" width="14" height="28" rx="2" fill="#C86A26" opacity="0.5"/>
+        <!-- Windshield (front, bottom) -->
+        <rect x="5" y="33" width="14" height="6" rx="2" fill="#EEE8DC" opacity="0.75"/>
+        <!-- Rear window (top) -->
+        <rect x="6" y="4" width="12" height="5" rx="1.5" fill="#EEE8DC" opacity="0.45"/>
+        <!-- Brand stripe across middle -->
+        <rect x="3" y="19" width="18" height="3" fill="#7B3D1B" opacity="0.7"/>
+        <!-- Headlights (front/bottom) -->
+        <rect x="4" y="39" width="5" height="3" rx="1" fill="#EEE8DC"/>
+        <rect x="15" y="39" width="5" height="3" rx="1" fill="#EEE8DC"/>
+        <!-- Rear lights (top) -->
+        <rect x="3" y="3" width="4" height="2.5" rx="1" fill="#C86A26" opacity="0.8"/>
+        <rect x="17" y="3" width="4" height="2.5" rx="1" fill="#C86A26" opacity="0.8"/>
+        <!-- Side mirrors (front) -->
+        <rect x="0" y="32" width="3" height="4" rx="1" fill="#7B3D1B"/>
+        <rect x="21" y="32" width="3" height="4" rx="1" fill="#7B3D1B"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ── ACCESSIBILITY WIDGET ──────────────────────────────────────── -->
+<div class="a11y-btn-wrap">
+  <button class="a11y-btn" aria-label="Open accessibility options" type="button">
+    <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <!-- Circle border -->
+      <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="7"/>
+      <!-- Head -->
+      <circle cx="50" cy="24" r="8"/>
+      <!-- Body -->
+      <rect x="46" y="35" width="8" height="24" rx="4"/>
+      <!-- Arms spread wide horizontally -->
+      <rect x="14" y="36" width="32" height="7" rx="3.5" transform="rotate(-5 14 36)"/>
+      <rect x="54" y="36" width="32" height="7" rx="3.5" transform="rotate(5 86 36)"/>
+      <!-- Legs spread -->
+      <rect x="46" y="57" width="7" height="28" rx="3.5" transform="rotate(-12 50 57)"/>
+      <rect x="47" y="57" width="7" height="28" rx="3.5" transform="rotate(12 50 57)"/>
+    </svg>
+  </button>
+  <div class="a11y-tip" role="tooltip">Accessibility Options</div>
+</div>
+
+<!-- ── Basic code protection ─────────────────────────────────────── -->
+<script>
+  // ── Scroll road indicator ──────────────────────────────────────
+  (function() {
+    const indicator = document.getElementById('scrollIndicator');
+    const roadTrack  = document.getElementById('roadTrack');
+    const roadFill   = document.getElementById('roadFill');
+    const roadCar    = document.getElementById('roadCar');
+    const CAR_H = 24; // half the van SVG height in px
+
+    function update() {
+      const scrolled  = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll <= 0) return;
+
+      const progress   = Math.min(scrolled / maxScroll, 1);
+      const trackH     = roadTrack.offsetHeight;
+      const carTop     = progress * (trackH - CAR_H);
+
+      roadCar.style.top  = carTop + 'px';
+      roadFill.style.height = (carTop + CAR_H / 2) + 'px';
+
+      // Show after first scroll
+      if (scrolled > 60) {
+        indicator.classList.add('visible');
+      } else {
+        indicator.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
+
+  // ── Quote Quiz ────────────────────────────────────────────────
+  (function() {
+    const answers = {};
+    const steps = [null, 'qStep1', 'qStep2', 'qStep3', 'qStep4', 'qStep5'];
+    const barWidths = ['33%', '33%', '66%', '99%', '100%', '100%'];
+    const stepLabels = ['', 'Step 1 of 3', 'Step 2 of 3', 'Step 3 of 3', 'Almost done!', 'Done!'];
+    let current = 1;
+
+    function showStep(n) {
+      steps.forEach((id, i) => {
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle('active', i === n);
+      });
+      document.getElementById('quizBar').style.width = barWidths[n];
+      document.getElementById('quizStepLabel').textContent = stepLabels[n];
+      current = n;
+    }
+
+    // Handle option clicks (steps 1-3)
+    document.querySelectorAll('.quiz-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const key = this.dataset.key;
+        const val = this.dataset.val;
+        answers[key] = val;
+
+        // Visual feedback
+        const siblings = this.closest('.quiz-options').querySelectorAll('.quiz-opt');
+        siblings.forEach(function(s) { s.style.borderColor = ''; s.style.background = ''; });
+        this.style.borderColor = 'var(--orange-text)';
+        this.style.background = 'rgba(165,78,23,0.18)';
+
+        // Auto-advance after brief delay
+        setTimeout(function() {
+          if (key === 'service') showStep(2);
+          else if (key === 'vehicle') showStep(3);
+          else if (key === 'goal') {
+            // Build summary
+            var summary = document.getElementById('quizSummary');
+            summary.innerHTML =
+              '<strong>Service:</strong> ' + answers.service + '&nbsp;&nbsp;·&nbsp;&nbsp;' +
+              '<strong>Vehicle:</strong> ' + answers.vehicle + '&nbsp;&nbsp;·&nbsp;&nbsp;' +
+              '<strong>Goal:</strong> ' + answers.goal;
+            showStep(4);
+          }
+        }, 260);
+      });
+    });
+
+    // Submit handler
+    document.getElementById('quizSubmitBtn').addEventListener('click', function() {
+      var name = document.getElementById('quizName').value.trim();
+      var phone = document.getElementById('quizPhone').value.trim();
+      if (!name || !phone) {
+        if (!name) document.getElementById('quizName').style.borderColor = 'var(--orange-text)';
+        if (!phone) document.getElementById('quizPhone').style.borderColor = 'var(--orange-text)';
+        return;
+      }
+      // In a real site this would POST to a form handler / CRM
+      // For the mockup, just advance to success
+      showStep(5);
+    });
+  })();
+
+  // ── Marquee pause ──────────────────────────────────────────────
+  // (handled via inline onclick in HTML)
+
+  // Disable right-click on this mockup
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    // Silent prevention — no alert to avoid interrupting review
+    return false;
+  });
+
+  // Disable Ctrl+U (view-source) and common DevTools shortcuts
+  document.addEventListener('keydown', function(e) {
+    if (
+      (e.ctrlKey && e.key === 'u') ||      // View Source
+      (e.ctrlKey && e.key === 's') ||      // Save page
+      (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'j' || e.key === 'c')) ||
+      e.key === 'F12'
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  });
+</script>
+
+</body>
+</html>
